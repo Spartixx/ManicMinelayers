@@ -1,0 +1,14 @@
+services:
+  app:
+    working_dir: /app
+    volumes:
+      - ./:/app
+    build:
+      context: .
+      target: app
+
+  test:
+    working_dir: /app
+    build:
+      context: .
+    command: uv run tests

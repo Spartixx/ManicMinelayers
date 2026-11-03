@@ -1,0 +1,2 @@
+pygame-ce==2.5.8
+click==8.5.0
