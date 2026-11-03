@@ -1,5 +1,5 @@
-from src.classes.manic_mine_layers import Game
+from classes.manic_mine_layers import ManicMineLayers
 
 
-def display(game: Game):
+def display(game: ManicMineLayers):
     pass
