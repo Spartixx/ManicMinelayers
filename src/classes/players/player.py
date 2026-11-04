@@ -8,3 +8,7 @@ class Player(ABC):
     @abstractmethod
     def play(self):
         pass
+
+    @abstractmethod
+    def position(self):
+        pass
