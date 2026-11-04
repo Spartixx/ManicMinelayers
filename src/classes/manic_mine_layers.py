@@ -7,23 +7,23 @@ from src.enums.cell_state import CellState
 from src.enums.game_state import GameState
 
 class ManicMineLayers:
-    def __init__(self, player_1: Player, player_2: Player, m=5, n=10):
+    def __init__(self, player_1: Player, player_2: Player, row_length=5, column_length=10):
         self._player_1 = player_1
         self._player_2 = player_2
-        self._m = m
-        self._n = n
+        self._row_length = row_length
+        self._column_length = column_length
         self._grid = [
-            [CellState.EMPTY for _ in range(n)]
-            for _ in range(m)
+            [CellState.EMPTY for _ in range(column_length)]
+            for _ in range(row_length)
         ]
         self._current_player = None
     @property
-    def m(self):
-        return self._m
+    def row_length(self):
+        return self._row_length
 
     @property
-    def n(self):
-        return self._n
+    def column_length(self):
+        return self._column_length
 
     @property
     def grid(self):
