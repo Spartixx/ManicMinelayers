@@ -1,6 +1,6 @@
 from typing import Callable
 
-from src.ui.main import display as ui_display
+from src.ui.game_view import display as ui_display
 
 
 def play_game(display: Callable, player_1, player_2):
