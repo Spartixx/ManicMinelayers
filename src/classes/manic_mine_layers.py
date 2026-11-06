@@ -2,24 +2,36 @@ from typing import Callable
 
 import copy
 
-from src.classes.players.player import Player
+from src.classes.algorithms.algorithm import Algorithm
 from src.enums.cell_state import CellState
 from src.enums.game_state import GameState
 
 class ManicMineLayers:
-    def __init__(self, player_1: Player, player_2: Player, row_length=5, column_length=10):
-        self._player_1 = player_1
-        self._player_2 = player_2
+    def __init__(
+        self,
+        algorithm_1: Algorithm,
+        algorithm_2: Algorithm,
+        algorithm_1_initial_position_y: int = 0,
+        algorithm_2_initial_position_y: int = 0,
+        row_length=5,
+        column_length=10
+    ):
+        self._algorithm_1 = algorithm_1
+        self._algorithm_2 = algorithm_2
+        self._current_algorithm = algorithm_1
+        self._algorithm_1_position = [algorithm_1_initial_position_y, 1] if 0 <= algorithm_1_initial_position_y < column_length else [0, 0]
+        self._algorithm_2_position = [algorithm_2_initial_position_y, 0] if 0 <= algorithm_2_initial_position_y < column_length else [0, 1]
+
         self._row_length = row_length
         self._column_length = column_length
         self._grid = [
             [CellState.EMPTY for _ in range(column_length)]
             for _ in range(row_length)
         ]
-        self._grid[0][0] = CellState.MARKED
-        self._grid[self._player_1.position[0]][self._player_1.position[1]] = CellState.PLAYER1
-        self._grid[self._player_2.position[0]][self._player_2.position[1]] = CellState.PLAYER2
-        self._current_player = None
+
+        self._grid[self._algorithm_1_position[0]][self._algorithm_1_position[1]] = CellState.PLAYER1
+        self._grid[self._algorithm_2_position[0]][self._algorithm_2_position[1]] = CellState.PLAYER2
+
     @property
     def row_length(self):
         return self._row_length
@@ -33,27 +45,27 @@ class ManicMineLayers:
         return copy.deepcopy(self._grid)
 
     @property
-    def player_1(self):
-        return self._player_1
+    def algorithm_1(self):
+        return self._algorithm_1
     
     @property
-    def player_2(self):
-        return self._player_2
+    def algorithm_2(self):
+        return self._algorithm_2
 
     @property
-    def current_player(self):
-        return self._current_player
+    def current_algorithm(self):
+        return self._current_algorithm
 
     def start(self, display: Callable | None):
         """
-        Start the game with the 2 players using a display method or not.
+        Start the game with the 2 algorithms using a display method or not.
         """
         pass
 
-    def opponent(self, player):
-        if player == self.player_1:
-            return self._player_2
-        return self._player_1
+    def opponent(self, algorithm):
+        if algorithm == self.algorithm_1:
+            return self._algorithm_2
+        return self._algorithm_1
     
     def is_empty(self, i, j):
         """
@@ -65,13 +77,13 @@ class ManicMineLayers:
             return True
         return False
 
-    def possible_moves(self, player: Player) -> tuple[int, int]:
+    def possible_moves(self, algorithm: Algorithm) -> tuple[int, int]:
         """
-        Save the possible shots for a player by his position and return a list
+        Save the possible shots for a algorithm by his position and return a list
         """
         jumps = [(-2,-1),(-2,1), (2,-1), (2,1), (-1,-2), (1,-2), (-1,2), (1,2)]
         valid_moves = []
-        position = player.position
+        position = self._algorithm_1_position if self._current_algorithm == self._algorithm_1 else self._algorithm_2_position
 
         for jump in jumps:
             i = position[0] + jump[0]
@@ -81,33 +93,32 @@ class ManicMineLayers:
 
         return valid_moves
 
-    def play_move(self, player: Player, move: tuple[int, int]) -> None:
+    def play_move(self, algorithm: Algorithm, move: tuple[int, int]) -> None:
         """
-        PLay the move and mark the old square
+        Play the move and mark the old square
         """
-        if move not in self.possible_moves(player):
+        if move not in self.possible_moves(algorithm):
             raise ValueError("Invalid move")
         
-        old_position = player.position
-        if old_position is not None:
-            self._grid[old_position[0]][old_position[1]]= CellState.MARKED
+        old_position = self._algorithm_1_position if self._current_algorithm == self._algorithm_1 else self._algorithm_2_position
+        self._grid[old_position[0]][old_position[1]]= CellState.MARKED
 
-        state = CellState.PLAYER1 if player == self._player_1 else CellState.PLAYER2
+        state = CellState.PLAYER1 if algorithm == self._algorithm_1 else CellState.PLAYER2
         self._grid[move[0]][move[1]] = state
-        player.position = move
+        algorithm.position = move
 
-    def is_blocked(self, player: Player) -> bool:
+    def is_blocked(self, algorithm: Algorithm) -> bool:
         """
-        Verify if player can move or not 
+        Verify if algorithm can move or not 
         """
-        return len(self.possible_moves(player)) == 0
+        return len(self.possible_moves(algorithm)) == 0
 
     def game_status(self) -> GameState:
         """
         Check the status of game
         """
-        current_blocked = self.is_blocked(self._current_player)
-        opponent_blocked = self.is_blocked(self.opponent(self._current_player))
+        current_blocked = self.is_blocked(self._current_algorithm)
+        opponent_blocked = self.is_blocked(self.opponent(self._current_algorithm))
 
         if current_blocked and opponent_blocked:
             return GameState.DRAW
