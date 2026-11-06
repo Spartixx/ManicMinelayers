@@ -4,7 +4,7 @@ from src.classes.algorithms.human import Human
 from src.classes.algorithms.stupidbot import StupidBot
 from src.classes.player import Player
 from src.classes.manic_mine_layers import ManicMineLayers
-from src.enums.cell_state import CellState
+from src.schemas.cell_state import CellState
 
 class GameView:
     def __init__(self, manic_mine_layers: ManicMineLayers, case_size: int=60):
@@ -21,7 +21,7 @@ class GameView:
 
         pygame.display.set_caption("Manic Minelayers")
 
-    def display(self, message: str):
+    def display(self):
         """
         Show the grid 
         """
@@ -42,7 +42,7 @@ class GameView:
 
                 pygame.draw.rect(self.screen, (0, 0, 0), rectangle, 1)
 
-        text_surface = self.font.render(message, True, (0, 0, 0))
+        text_surface = self.font.render(f"Au tour du joueur {"1" if self.manic_mine_layers.current_player == self.manic_mine_layers.player_1 else "2"}", True, (0, 0, 0))
         center_x = (self.manic_mine_layers.column_length * self.case_size) // 2
         center_y = self.manic_mine_layers.row_length * self.case_size + 20
         text_center = text_surface.get_rect(center=(center_x, center_y))
@@ -59,10 +59,13 @@ class GameView:
             return i,j
         return None
 
-    def choose_cell(self):
+    def choose_cell(self) -> None | tuple[int, int]:
         """
         Choose a cell by clicking a cell on the screen
+
+        returns None or tuple[int, int]. If None, it means a human player decided to stop the game.
         """
+        cell: tuple[int, int] | None = None
         in_game = True
         while in_game:
             for event in pygame.event.get():
@@ -72,11 +75,9 @@ class GameView:
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     x, y = event.pos
                     cell = self.pixel_to_cell(x,y)
-                    print(cell)
-
-            self.display("Au tour du joueur 1")
+                    return cell
         pygame.quit()  
-
+        return cell
 
 if __name__ == "__main__":
     # Use only for dev tests. Unit tests will be added then.
@@ -93,5 +94,4 @@ if __name__ == "__main__":
         )
     )
     view = GameView(game)
-    view.choose_cell()
-    view.display("Au tour du joueur 2")
+    game.start(view)

@@ -1,4 +1,5 @@
 from enum import Enum
+
 class CellState(Enum):
     EMPTY = " "
     MARKED = "X"
