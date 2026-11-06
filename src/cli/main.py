@@ -1,5 +1,6 @@
 import click
 
+from src.classes.algorithms.greedy import Greedy
 from src.classes.algorithms.human import Human
 from src.classes.algorithms.mcts import MCTS
 from src.classes.algorithms.minmax import MinMax
@@ -29,6 +30,8 @@ def _get_algorithm_instance(algorithm_type: AlgorithmType, game: ManicMineLayers
             return StupidBot(game)
         case AlgorithmType.MINMAX.value:
             return MinMax(game)
+        case AlgorithmType.GREEDY.value:
+            return Greedy(game)
 
 @click.command()
 @click.argument('algorithm_1')
