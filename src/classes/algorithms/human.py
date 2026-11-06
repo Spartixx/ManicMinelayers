@@ -6,5 +6,5 @@ class Human(Algorithm):
     def __init__(self, game: ManicMineLayers):
         super().__init__(game)
 
-    def get_move(self):
+    def get_move(self, from_position: tuple[int, int]) -> tuple[int, int]:
         pass

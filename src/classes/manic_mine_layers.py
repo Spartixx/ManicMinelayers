@@ -74,13 +74,12 @@ class ManicMineLayers:
             return True
         return False
 
-    def possible_moves(self, player: Player) -> tuple[int, int]:
+    def possible_moves(self, position: tuple[int, int]) -> tuple[int, int]:
         """
         Save the possible shots for a player by his position and return a list
         """
         jumps = [(-2,-1),(-2,1), (2,-1), (2,1), (-1,-2), (1,-2), (-1,2), (1,2)]
         valid_moves = []
-        position = player.position
 
         for jump in jumps:
             i = position[0] + jump[0]
