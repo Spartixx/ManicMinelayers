@@ -1,15 +1,13 @@
-from typing import Callable
+from typing import Callable, Literal
 
 import copy
 
-from src.classes.players.player import Player
+from src.classes.player import Player
 from src.enums.cell_state import CellState
 from src.enums.game_state import GameState
 
 class ManicMineLayers:
-    def __init__(self, player_1: Player, player_2: Player, row_length=5, column_length=10):
-        self._player_1 = player_1
-        self._player_2 = player_2
+    def __init__(self, row_length=5, column_length=10):
         self._row_length = row_length
         self._column_length = column_length
         self._grid = [
@@ -17,9 +15,17 @@ class ManicMineLayers:
             for _ in range(row_length)
         ]
         self._grid[0][0] = CellState.MARKED
+        self._player_1 = None
+        self._player_2 = None
+        self._current_player = None
+
+    def set_players(self, player_1: Player, player_2: Player, current_player: Literal["1", "2"]):
+        self._player_1 = player_1
+        self._player_2 = player_2
+        self._current_player = self._player_1 if current_player == "1" else self._player_2
         self._grid[self._player_1.position[0]][self._player_1.position[1]] = CellState.PLAYER1
         self._grid[self._player_2.position[0]][self._player_2.position[1]] = CellState.PLAYER2
-        self._current_player = None
+
     @property
     def row_length(self):
         return self._row_length
@@ -33,15 +39,15 @@ class ManicMineLayers:
         return copy.deepcopy(self._grid)
 
     @property
-    def player_1(self):
+    def player_1(self) -> Player | None:
         return self._player_1
     
     @property
-    def player_2(self):
+    def player_2(self) -> Player | None:
         return self._player_2
 
     @property
-    def current_player(self):
+    def current_player(self) -> Player | None:
         return self._current_player
 
     def start(self, display: Callable | None):
@@ -51,6 +57,9 @@ class ManicMineLayers:
         pass
 
     def opponent(self, player):
+        if self._current_player is None:
+            raise Exception("Players are not set.")
+
         if player == self.player_1:
             return self._player_2
         return self._player_1
