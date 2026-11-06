@@ -16,6 +16,9 @@ class ManicMineLayers:
             [CellState.EMPTY for _ in range(column_length)]
             for _ in range(row_length)
         ]
+        self._grid[0][0] = CellState.MARKED
+        self._grid[self._player_1.position[0]][self._player_1.position[1]] = CellState.PLAYER1
+        self._grid[self._player_2.position[0]][self._player_2.position[1]] = CellState.PLAYER2
         self._current_player = None
     @property
     def row_length(self):
@@ -56,13 +59,13 @@ class ManicMineLayers:
         """
         Check if square(i, j) is empty or not. Empty means (not busy and not marked)
         """
-        if i < 0 or i >= self.m or j < 0 or j >= self.n:
+        if i < 0 or i >= self.row_length or j < 0 or j >= self.column_length:
             return False
         if self._grid[i][j] == CellState.EMPTY:
             return True
         return False
 
-    def possible_moves(self, player: Player):
+    def possible_moves(self, player: Player) -> tuple[int, int]:
         """
         Save the possible shots for a player by his position and return a list
         """
@@ -75,15 +78,15 @@ class ManicMineLayers:
             j = position[1] + jump[1]
             if self.is_empty(i, j):
                 valid_moves.append((i,j))
+
         return valid_moves
 
-    def play_move(self, player, move):
+    def play_move(self, player: Player, move: tuple[int, int]) -> None:
         """
         PLay the move and mark the old square
         """
         if move not in self.possible_moves(player):
             raise ValueError("Invalid move")
-
         
         old_position = player.position
         if old_position is not None:
@@ -93,13 +96,13 @@ class ManicMineLayers:
         self._grid[move[0]][move[1]] = state
         player.position = move
 
-    def is_blocked(self, player: Player):
+    def is_blocked(self, player: Player) -> bool:
         """
         Verify if player can move or not 
         """
         return len(self.possible_moves(player)) == 0
 
-    def game_status(self):
+    def game_status(self) -> GameState:
         """
         Check the status of game
         """
