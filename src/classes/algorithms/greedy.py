@@ -1,45 +1,36 @@
 import copy, random
 
-from classes.manic_mine_layers import ManicMineLayers
+from src.schemas.algorithms import AlgorithmType
 from src.classes.algorithms.algorithm import Algorithm
-from src.classes.player import Player
 
 class Greedy(Algorithm):
-    def __init__(self, game: ManicMineLayers, player: Player) -> None:
+    def __init__(self, game) -> None:
         super().__init__(game)
-        self._player = player 
 
-    @property
-    def player(self) -> Player:
-        return self._player 
-       
-    def evaluate_move(self, move: tuple[int, int]) -> int:
+    def get_algorithm_type(self) -> AlgorithmType:
+        return AlgorithmType.GREEDY
+
+    def evaluate_move(self, from_position: tuple[int, int], other_player_position: tuple[int, int], move: tuple[int, int]) -> int:
         """
-        Evaluate the move 
+        Evaluate the move
         """
         game = copy.deepcopy(self.game)
 
-        if self.player == self.game.player_1:
-            simulated_player = game.player_1
-        else:
-            simulated_player = game.player_2
-
-        game.play_move(simulated_player, move)
-        opponent = game.opponent(simulated_player)
-        len_possible_move_opponent = len(game.possible_moves(opponent))
+        game.play_move(game.get_player_from_position(from_position), move)
+        len_possible_move_opponent = len(game.possible_moves(other_player_position))
         return len_possible_move_opponent
 
-    def get_move(self) -> tuple[int, int] | None:
+    def get_move(self, from_position: tuple[int, int], other_player_position: tuple[int, int]) -> tuple[int, int] | None:
         """
         Return the best move 
         """
-        moves = self.game.possible_moves(self.player)
+        moves = self.game.possible_moves(from_position)
 
         best_moves: list[tuple[int, int]] = []
         best_score = float("inf")
 
         for move in moves:
-            score = self.evaluate_move(move)
+            score = self.evaluate_move(from_position, other_player_position, move)
             if score < best_score:
                 best_score = score
                 best_moves.clear()
@@ -49,11 +40,3 @@ class Greedy(Algorithm):
         if not best_moves:
             return None   
         return random.choice(best_moves)
-            
-
-
-
-        
-
-    
-    

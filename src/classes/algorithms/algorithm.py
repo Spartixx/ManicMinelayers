@@ -8,7 +8,7 @@ class Algorithm(ABC):
         self._game = game
 
     @abstractmethod
-    def get_move(self, from_position: tuple[int, int]) -> tuple[int, int] | None:
+    def get_move(self, from_position: tuple[int, int], other_player_position: tuple[int, int]) -> tuple[int, int] | None:
         """
         get next algorithm move according to a specified "from_position". If results is None, it means the game is aborted.
         """

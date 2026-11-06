@@ -110,13 +110,13 @@ class ManicMineLayers:
                 if self._current_player.algorithm.get_algorithm_type() == AlgorithmType.HUMAN:
                     def _play_human():
                         try:
-                            self.play_move(self._current_player, self._current_player.play(game_ui))
+                            self.play_move(self._current_player, self._current_player.play(self.opponent(self._current_player).position, game_ui))
                         except ValueError:
                             _play_human()
                     _play_human()
                 else:
                     sleep(ai_speed)
-                    self.play_move(self._current_player, self._current_player.play())
+                    self.play_move(self._current_player, self._current_player.play(self.opponent(self._current_player).position))
             except AbortionException:
                 return self._get_aborted_game_analytics()
 
@@ -156,6 +156,13 @@ class ManicMineLayers:
                 valid_moves.append((i,j))
 
         return valid_moves
+
+    def get_player_from_position(self, position: tuple[int, int]) -> Player | None:
+        if self.player_2.position == position:
+            return self._player_2
+        if self.player_1.position == position:
+            return self._player_1
+        return None
 
     def play_move(self, player: Player, move: tuple[int, int]) -> None:
         """
