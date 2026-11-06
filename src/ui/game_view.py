@@ -1,8 +1,9 @@
 import pygame
 
+from src.classes.algorithms.human import Human
+from src.classes.algorithms.stupidbot import StupidBot
+from src.classes.player import Player
 from src.classes.manic_mine_layers import ManicMineLayers
-from src.classes.players.human import Human
-from src.classes.players.stupidbot import StupidBot
 from src.enums.cell_state import CellState
 
 class GameView:
@@ -79,7 +80,18 @@ class GameView:
 
 if __name__ == "__main__":
     # Use only for dev tests. Unit tests will be added then.
-    game = ManicMineLayers(Human([2, 5]), StupidBot([1, 3]))
+    game = ManicMineLayers()
+    game.set_players(
+        current_player=1,
+        player_1=Player(
+            algorithm=Human(game=game),
+            number=1
+        ),
+        player_2=Player(
+            algorithm=StupidBot(game=game),
+            number=2
+        )
+    )
     view = GameView(game)
     view.choose_cell()
     view.display("Au tour du joueur 2")
