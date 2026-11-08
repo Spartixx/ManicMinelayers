@@ -71,6 +71,8 @@ class ManicMineLayers:
                 win=True if self._current_player == self.player_1 else False,
             ),
             is_aborted=True,
+            player_1_algorithm=self._player_1.algorithm.get_algorithm_type(),
+            player_2_algorithm=self._player_2.algorithm.get_algorithm_type(),
             player_winner=self.opponent(self._current_player).number,
             algorithm_winner=self.opponent(self._current_player).algorithm.get_algorithm_type(),
         )
@@ -95,6 +97,8 @@ class ManicMineLayers:
                 win=None if winner is None else winner == self._player_2,
             ),
             is_aborted=False,
+            player_1_algorithm=self._player_1.algorithm.get_algorithm_type(),
+            player_2_algorithm=self._player_2.algorithm.get_algorithm_type(),
             player_winner=None if winner is None else winner.number,
             algorithm_winner=None if winner is None else winner.algorithm.get_algorithm_type(),
         )
@@ -107,6 +111,7 @@ class ManicMineLayers:
         :param ai_speed: Speed of the AI. It represents the time that should be elapsed before a player with an AI algorithm play ( not including algorithm elapsed time to choose next move ). It can be useful to follow a game played by 2 players with AI algorithms. Otherwise, the game would be too fast to be followed.
         """
         self._check_player_are_set()
+        print("oui")
 
         while self._game_state == GameState.ONGOING and self._current_player is not None:
             if game_ui:

@@ -12,6 +12,7 @@ Make AI playing ManicMinelayers with each others !
 - human ( You play )
 - minmax
 - MCTS
+- greedy
 
 ## Technical documentation 
 - [Project Context](docs/CONTEXT.md)
@@ -26,46 +27,21 @@ Make AI playing ManicMinelayers with each others !
 
 ---
 
-### Using make :
-#### Make play 2 players and look at the game in live ( at a humain speed )
-```sh
-make play <player_1> <player_2>
+### Play against an AI
+```shell
+python3 -m src.cli.play human stupid_bot
 ```
 
-Example:
-```sh
-make play stupidbot minmax
+### Make 2 AI play with each others and look at the game
+```shell
+python3 -m src.cli.play minmax stupid_bot
 ```
 
----
+- use ``--ai_speed=<a_float>`` to adjust AI play speed in the game.
+- use ``--show_ui`` to display or not the ui if 2 players with AI algorithms are playing. By default, if 2 players with 
+AI algorithms are playing, UI will not be displayed.
 
-#### Make play 2 players and get statistics ( Games are played as fast as possible )
-```sh
-make statistics <player_1> <player_2> <iterations> <optionnal_json_config_file>
-```
-
-Example:
-```sh
-make statistics minmax stupidbot 10 ./hyper_parameters_config.json
-```
-
-## Configure hyperparameters
-
----
-
-You can use a configuration file to adjust hyperparameters. It can be usefull to make play 2 players with each others,
-and get statistics using those hyperparameters. Then, You will be able to analyse AI performance according to their
-hyperparameters. AI analytics are then generated and saved each time you run statistics, you can retrieve a report
-telling which parameters were most performing (with some performance indicators). Another history file is available to 
-retrieve past game analytics.
-
-### File format
-You must use a **json** file. Here are the available keys to configure your hyperparameters. Each value in this exemple
-is the configuration default value if no file is provided.
-
-// TODO
-```json
-{
-  
-}
+#### Example
+```shell
+python3 -m src.cli.play minmax stupid_bot --show_ui --ai_speed=0.2
 ```
