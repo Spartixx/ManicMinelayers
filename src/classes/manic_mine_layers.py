@@ -75,22 +75,28 @@ class ManicMineLayers:
             algorithm_winner=self.opponent(self._current_player).algorithm.get_algorithm_type(),
         )
 
-    def _get_value_by_state(self, win_value, draw_value, lose_value):
-        return win_value if self._game_state == GameState.CURRENT_WIN else draw_value if self._game_state == GameState.DRAW else lose_value
+    def _get_game_winner(self) -> Player | None:
+        last_player = self.opponent(self._current_player)
+        if self._game_state == GameState.CURRENT_WIN:
+            return last_player
+        if self._game_state == GameState.OPPONENT_WIN:
+            return self._current_player
+        return None
 
     def _get_game_analytics(self) -> GameAnalytics:
+        winner = self._get_game_winner()
         return GameAnalytics(
             player_1_analytics=PlayerAnalytics(
                 total_moves=1,
-                win=self._get_value_by_state(True, None, False),
+                win=None if winner is None else winner == self._player_1,
             ),
             player_2_analytics=PlayerAnalytics(
                 total_moves=1,
-                win=self._get_value_by_state(False, None, True),
+                win=None if winner is None else winner == self._player_2,
             ),
             is_aborted=False,
-            player_winner=self._get_value_by_state(1, None, 2),
-            algorithm_winner=self._get_value_by_state(self._player_1.algorithm.get_algorithm_type(), None, self._player_2.algorithm.get_algorithm_type()),
+            player_winner=None if winner is None else winner.number,
+            algorithm_winner=None if winner is None else winner.algorithm.get_algorithm_type(),
         )
 
     def start(self, game_ui = None, ai_speed: float = 2) -> GameAnalytics:
