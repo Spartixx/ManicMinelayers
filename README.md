@@ -26,6 +26,31 @@ Make AI playing ManicMinelayers with each others !
 ## Usage
 
 ---
+### Requirements
+This python project requires you to install some packages:
+
+#### First, create a virtual environment 
+```shell
+python3 -m venv .venv
+```
+
+#### Then, enter in this virtual environment
+Mac / Linux
+```shell
+source .venv/bin/activate
+```
+
+Windows
+```shell
+.venv/Scripts/activate
+```
+
+#### Install required packages
+```shell
+pip install -r requirements.txt
+```
+
+---
 
 ### Play against an AI
 ```shell
@@ -45,6 +70,8 @@ AI algorithms are playing, UI will not be displayed.
 ```shell
 python3 -m src.cli.play minmax stupid_bot --show_ui --ai_speed=0.2
 ```
+
+---
 
 ## Contributors
 - Nicolas Macrez
