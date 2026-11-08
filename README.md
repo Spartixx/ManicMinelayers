@@ -45,3 +45,8 @@ AI algorithms are playing, UI will not be displayed.
 ```shell
 python3 -m src.cli.play minmax stupid_bot --show_ui --ai_speed=0.2
 ```
+
+## Contributors
+- Nicolas Macrez
+- El Asad Ben Nordine Hamissi Youssouf
+- Cédric Richard Bintcha Piame
