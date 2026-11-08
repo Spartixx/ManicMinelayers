@@ -1,12 +1,12 @@
 # Technical Documentation - Player and Algorithms 
 
 ## Table of contents 
-- [1. Human class](#1-human)
-- [2. StupidBot class](#2-stupidbot)
-- [3. Greedy class](#3-greedy)
+- [1. Human class](#human)
+- [2. StupidBot class](#stupidbot)
+- [3. Greedy class](#greedy)
 
 
-### [1.Human class](#1-human)
+### [1.Human class](#human)
 #### Overview
 The Human class represents a human-controlled player in ManicMinelayers.
 
@@ -26,7 +26,7 @@ The selected position is then returned to the calling component.
 - `get_algorithm_type()` : returns AlgorithmType.Human to identify the player type.
 
 
-### [2. StupidBot class](#2-stupidbot)
+### [2. StupidBot class](#stupidbot)
 #### Overview
 The StupidBot class represents a basic automated player in ManicMinelayers.
 
@@ -46,7 +46,7 @@ The selection is performed using :
 - `get_move(from_position, other_player_position)` : retrieves the available moves and randomly selects one.
 - `get_algorithm_type()` : returns AlgorithmType.STUPID_BOT to identify the algorithm.
 
-### [3. Greedy class](#3-greedy)
+### [3. Greedy class](#greedy)
 #### Overview
 The Greedy class represents an algorithm that uses a greedy strategy to select its moves in ManicMinelayers.
 

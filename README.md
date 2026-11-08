@@ -13,6 +13,15 @@ Make AI playing ManicMinelayers with each others !
 - minmax
 - MCTS
 
+## Technical documentation 
+- [Project Context](docs/CONTEXT.md)
+- [Project Structure](docs/STRUCTURE.md)
+- [Interpretations of statistics](docs/ANALYTICS.md)
+- [Main class](docs/MAIN_CLASS.md)
+- [Player and Algorithm hierarchy](docs/PLAYER_ALGORITHM_HIERARCHY.md)
+- [MinMax ](docs/MINMAX.md)
+- [MCTS](docs/MCTS.md)
+
 ## Usage
 
 ---
