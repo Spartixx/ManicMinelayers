@@ -1,0 +1,342 @@
+{
+  "mcts": {
+    "total_wins": 1,
+    "against": {
+      "mcts": {
+        "total_wins": 0,
+        "games": [
+          {
+            "player_1_algorithm": "MCTS",
+            "player_2_algorithm": "MCTS",
+            "player_1_analytics": {
+              "win": null,
+              "total_moves": 1
+            },
+            "player_2_analytics": {
+              "win": null,
+              "total_moves": 1
+            },
+            "player_winner": null,
+            "algorithm_winner": null,
+            "is_aborted": false
+          }
+        ]
+      },
+      "minmax": {
+        "total_wins": 0,
+        "games": [
+          {
+            "player_1_algorithm": "MCTS",
+            "player_2_algorithm": "MINMAX",
+            "player_1_analytics": {
+              "win": false,
+              "total_moves": 1
+            },
+            "player_2_analytics": {
+              "win": true,
+              "total_moves": 1
+            },
+            "player_winner": 2,
+            "algorithm_winner": "MINMAX",
+            "is_aborted": false
+          }
+        ]
+      },
+      "greedy": {
+        "total_wins": 0,
+        "games": [
+          {
+            "player_1_algorithm": "MCTS",
+            "player_2_algorithm": "GREEDY",
+            "player_1_analytics": {
+              "win": false,
+              "total_moves": 1
+            },
+            "player_2_analytics": {
+              "win": true,
+              "total_moves": 1
+            },
+            "player_winner": 2,
+            "algorithm_winner": "GREEDY",
+            "is_aborted": false
+          }
+        ]
+      },
+      "stupid_bot": {
+        "total_wins": 1,
+        "games": [
+          {
+            "player_1_algorithm": "MCTS",
+            "player_2_algorithm": "STUPID_BOT",
+            "player_1_analytics": {
+              "win": true,
+              "total_moves": 1
+            },
+            "player_2_analytics": {
+              "win": false,
+              "total_moves": 1
+            },
+            "player_winner": 1,
+            "algorithm_winner": "MCTS",
+            "is_aborted": false
+          }
+        ]
+      }
+    }
+  },
+  "mini_max": {
+    "total_wins": 3,
+    "against": {
+      "mcts": {
+        "total_wins": 1,
+        "games": [
+          {
+            "player_1_algorithm": "MINMAX",
+            "player_2_algorithm": "MCTS",
+            "player_1_analytics": {
+              "win": true,
+              "total_moves": 1
+            },
+            "player_2_analytics": {
+              "win": false,
+              "total_moves": 1
+            },
+            "player_winner": 1,
+            "algorithm_winner": "MINMAX",
+            "is_aborted": false
+          }
+        ]
+      },
+      "minmax": {
+        "total_wins": 0,
+        "games": [
+          {
+            "player_1_algorithm": "MINMAX",
+            "player_2_algorithm": "MINMAX",
+            "player_1_analytics": {
+              "win": false,
+              "total_moves": 1
+            },
+            "player_2_analytics": {
+              "win": true,
+              "total_moves": 1
+            },
+            "player_winner": 2,
+            "algorithm_winner": "MINMAX",
+            "is_aborted": false
+          }
+        ]
+      },
+      "greedy": {
+        "total_wins": 1,
+        "games": [
+          {
+            "player_1_algorithm": "MINMAX",
+            "player_2_algorithm": "GREEDY",
+            "player_1_analytics": {
+              "win": true,
+              "total_moves": 1
+            },
+            "player_2_analytics": {
+              "win": false,
+              "total_moves": 1
+            },
+            "player_winner": 1,
+            "algorithm_winner": "MINMAX",
+            "is_aborted": false
+          }
+        ]
+      },
+      "stupid_bot": {
+        "total_wins": 1,
+        "games": [
+          {
+            "player_1_algorithm": "MINMAX",
+            "player_2_algorithm": "STUPID_BOT",
+            "player_1_analytics": {
+              "win": true,
+              "total_moves": 1
+            },
+            "player_2_analytics": {
+              "win": false,
+              "total_moves": 1
+            },
+            "player_winner": 1,
+            "algorithm_winner": "MINMAX",
+            "is_aborted": false
+          }
+        ]
+      }
+    }
+  },
+  "stupid_bot": {
+    "total_wins": 1,
+    "against": {
+      "mcts": {
+        "total_wins": 0,
+        "games": [
+          {
+            "player_1_algorithm": "STUPID_BOT",
+            "player_2_algorithm": "MCTS",
+            "player_1_analytics": {
+              "win": null,
+              "total_moves": 1
+            },
+            "player_2_analytics": {
+              "win": null,
+              "total_moves": 1
+            },
+            "player_winner": null,
+            "algorithm_winner": null,
+            "is_aborted": false
+          }
+        ]
+      },
+      "minmax": {
+        "total_wins": 0,
+        "games": [
+          {
+            "player_1_algorithm": "STUPID_BOT",
+            "player_2_algorithm": "MINMAX",
+            "player_1_analytics": {
+              "win": false,
+              "total_moves": 1
+            },
+            "player_2_analytics": {
+              "win": true,
+              "total_moves": 1
+            },
+            "player_winner": 2,
+            "algorithm_winner": "MINMAX",
+            "is_aborted": false
+          }
+        ]
+      },
+      "greedy": {
+        "total_wins": 0,
+        "games": [
+          {
+            "player_1_algorithm": "STUPID_BOT",
+            "player_2_algorithm": "GREEDY",
+            "player_1_analytics": {
+              "win": false,
+              "total_moves": 1
+            },
+            "player_2_analytics": {
+              "win": true,
+              "total_moves": 1
+            },
+            "player_winner": 2,
+            "algorithm_winner": "GREEDY",
+            "is_aborted": false
+          }
+        ]
+      },
+      "stupid_bot": {
+        "total_wins": 1,
+        "games": [
+          {
+            "player_1_algorithm": "STUPID_BOT",
+            "player_2_algorithm": "STUPID_BOT",
+            "player_1_analytics": {
+              "win": true,
+              "total_moves": 1
+            },
+            "player_2_analytics": {
+              "win": false,
+              "total_moves": 1
+            },
+            "player_winner": 1,
+            "algorithm_winner": "STUPID_BOT",
+            "is_aborted": false
+          }
+        ]
+      }
+    }
+  },
+  "greedy": {
+    "total_wins": 1,
+    "against": {
+      "mcts": {
+        "total_wins": 0,
+        "games": [
+          {
+            "player_1_algorithm": "GREEDY",
+            "player_2_algorithm": "MCTS",
+            "player_1_analytics": {
+              "win": false,
+              "total_moves": 1
+            },
+            "player_2_analytics": {
+              "win": true,
+              "total_moves": 1
+            },
+            "player_winner": 2,
+            "algorithm_winner": "MCTS",
+            "is_aborted": false
+          }
+        ]
+      },
+      "minmax": {
+        "total_wins": 0,
+        "games": [
+          {
+            "player_1_algorithm": "GREEDY",
+            "player_2_algorithm": "MINMAX",
+            "player_1_analytics": {
+              "win": false,
+              "total_moves": 1
+            },
+            "player_2_analytics": {
+              "win": true,
+              "total_moves": 1
+            },
+            "player_winner": 2,
+            "algorithm_winner": "MINMAX",
+            "is_aborted": false
+          }
+        ]
+      },
+      "greedy": {
+        "total_wins": 1,
+        "games": [
+          {
+            "player_1_algorithm": "GREEDY",
+            "player_2_algorithm": "GREEDY",
+            "player_1_analytics": {
+              "win": true,
+              "total_moves": 1
+            },
+            "player_2_analytics": {
+              "win": false,
+              "total_moves": 1
+            },
+            "player_winner": 1,
+            "algorithm_winner": "GREEDY",
+            "is_aborted": false
+          }
+        ]
+      },
+      "stupid_bot": {
+        "total_wins": 0,
+        "games": [
+          {
+            "player_1_algorithm": "GREEDY",
+            "player_2_algorithm": "STUPID_BOT",
+            "player_1_analytics": {
+              "win": false,
+              "total_moves": 1
+            },
+            "player_2_analytics": {
+              "win": true,
+              "total_moves": 1
+            },
+            "player_winner": 2,
+            "algorithm_winner": "STUPID_BOT",
+            "is_aborted": false
+          }
+        ]
+      }
+    }
+  }
+}

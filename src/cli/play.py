@@ -1,5 +1,6 @@
 import click
 
+from src.classes.game_init_service import GameInitService
 from src.classes.algorithms.greedy import Greedy
 from src.classes.algorithms.human import Human
 from src.classes.algorithms.mcts import MCTS
@@ -7,7 +8,6 @@ from src.classes.algorithms.minmax import MinMax
 from src.classes.algorithms.stupidbot import StupidBot
 from src.classes.algorithms.algorithm import Algorithm
 from src.classes.manic_mine_layers import ManicMineLayers
-from src.classes.player import Player
 from src.schemas.algorithms import AlgorithmType
 from src.ui.game_view import GameView
 
@@ -36,17 +36,11 @@ def _get_algorithm_instance(algorithm_type: AlgorithmType, game: ManicMineLayers
 @click.command()
 @click.argument('algorithm_1')
 @click.argument('algorithm_2')
-@click.option('--show_ui', is_flag=True, default=True)
+@click.option('--show_ui', is_flag=True, default=False)
 @click.option('--ai_speed', default=2, type=float)
-def play(algorithm_1: str, algorithm_2: str, show_ui: bool = True, ai_speed: float = 2):
-    algorithm_1_type, algorithm_2_type = _get_algorithm_types(algorithm_1, algorithm_2)
-    game = ManicMineLayers()
-    game.set_players(
-        player_1=Player(algorithm=_get_algorithm_instance(algorithm_1_type, game), number=1),
-        player_2=Player(algorithm=_get_algorithm_instance(algorithm_2_type, game), number=2),
-        current_player=1
-    )
-    game_ui = GameView(game) if show_ui or algorithm_1_type == AlgorithmType.HUMAN or algorithm_2_type == AlgorithmType.HUMAN else None
+def play(algorithm_1: str, algorithm_2: str, show_ui: bool = False, ai_speed: float = 2):
+    game = GameInitService().init_game(algorithm_1, algorithm_2)
+    game_ui = GameView(game) if show_ui or game.player_1.algorithm.get_algorithm_type() == AlgorithmType.HUMAN or game.player_2.algorithm.get_algorithm_type() == AlgorithmType.HUMAN else None
     print(game.start(game_ui=game_ui, ai_speed=ai_speed))
 
 if __name__ == "__main__":
