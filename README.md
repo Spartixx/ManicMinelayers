@@ -1,12 +1,8 @@
 # ManicMinelayers
 
----
-
 Make AI playing ManicMinelayers with each others !
 
 ## Available players
-
----
 
 - stupidbot ( play with random choices )
 - human ( You play )
@@ -15,6 +11,7 @@ Make AI playing ManicMinelayers with each others !
 - greedy
 
 ## Technical documentation 
+
 - [Project Context](docs/CONTEXT.md)
 - [Project Structure](docs/STRUCTURE.md)
 - [Interpretations of statistics](docs/ANALYTICS.md)
@@ -25,7 +22,6 @@ Make AI playing ManicMinelayers with each others !
 
 ## Usage
 
----
 ### Requirements
 This python project requires you to install some packages:
 
